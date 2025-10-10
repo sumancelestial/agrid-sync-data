@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef } from 'ag-grid-community';
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-alpine.css';
+import '../ag-grid-basic.css';
+
 import { fetchData, DataRecord, FetchDataParams } from '@/services/mockApi';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -12,6 +12,10 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { CalendarIcon, Search, Loader2 } from 'lucide-react';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
+import { ModuleRegistry } from 'ag-grid-community';
+import { AllCommunityModule } from 'ag-grid-community'
+ModuleRegistry.registerModules([AllCommunityModule]);
+
 
 export const DataGrid = () => {
   const [rowData, setRowData] = useState<DataRecord[]>([]);
@@ -29,11 +33,28 @@ export const DataGrid = () => {
   const limit = 10;
 
   const columnDefs: ColDef[] = [
-    { field: 'id', headerName: 'ID', sortable: true, width: 100 },
-    { field: 'name', headerName: 'Name', sortable: true, width: 200 },
-    { field: 'email', headerName: 'Email', sortable: true, width: 220 },
+    { field: 'id', headerName: 'ID', sortable: true, width: 80, pinned: 'left' },
+    { field: 'name', headerName: 'Full Name', sortable: true, width: 200 },
+    { field: 'username', headerName: 'Username', sortable: true, width: 150 },
+    { field: 'email', headerName: 'Email', sortable: true, width: 250 },
+    { field: 'phone', headerName: 'Phone', sortable: true, width: 180 },
+    { field: 'website', headerName: 'Website', sortable: true, width: 200 },
+    { 
+      field: 'address', 
+      headerName: 'City', 
+      sortable: true, 
+      width: 150,
+      valueGetter: (params: any) => params.data.address.city
+    },
+    { 
+      field: 'company', 
+      headerName: 'Company', 
+      sortable: true, 
+      width: 200,
+      valueGetter: (params: any) => params.data.company.name
+    },
     { field: 'department', headerName: 'Department', sortable: true, width: 150 },
-    { field: 'date', headerName: 'Date', sortable: true, width: 130 },
+    { field: 'date', headerName: 'Join Date', sortable: true, width: 130 },
     { 
       field: 'status', 
       headerName: 'Status', 
@@ -135,7 +156,7 @@ export const DataGrid = () => {
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
-                  placeholder="Search by name, email..."
+                  placeholder="Search by name, email, username, company, city..."
                   value={search}
                   onChange={(e) => handleSearchChange(e.target.value)}
                   className="pl-9"
@@ -219,7 +240,12 @@ export const DataGrid = () => {
 
         {/* Grid */}
         <div className="bg-card rounded-lg border border-border overflow-hidden">
-          <div className="ag-theme-alpine" style={{ height: '500px', width: '100%' }}>
+          <div 
+            style={{ 
+              height: '500px', 
+              width: '100%'
+            }}
+          >
             {loading && (
               <div className="absolute inset-0 bg-background/50 flex items-center justify-center z-10">
                 <Loader2 className="h-8 w-8 animate-spin text-primary" />
@@ -231,6 +257,14 @@ export const DataGrid = () => {
               domLayout="normal"
               suppressPaginationPanel={true}
               suppressHorizontalScroll={false}
+              defaultColDef={{
+                resizable: true,
+                sortable: true,
+                filter: true
+              }}
+              animateRows={true}
+              rowSelection="multiple"
+              enableRangeSelection={true}
             />
           </div>
 

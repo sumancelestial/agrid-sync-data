@@ -1,0 +1,62 @@
+/* Basic AG Grid styles without theme conflicts */
+.ag-root-wrapper {
+  border: 1px solid hsl(var(--border));
+  border-radius: 8px;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.ag-header {
+  background-color: hsl(var(--card));
+  border-bottom: 1px solid hsl(var(--border));
+  color: hsl(var(--card-foreground));
+}
+
+.ag-header-cell {
+  background-color: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  border-right: 1px solid hsl(var(--border));
+  font-weight: 600;
+}
+
+.ag-header-cell:last-child {
+  border-right: none;
+}
+
+.ag-row {
+  border-bottom: 1px solid hsl(var(--border));
+  color: hsl(var(--foreground));
+  background-color: hsl(var(--background));
+}
+
+.ag-row:hover {
+  background-color: hsl(var(--muted));
+}
+
+.ag-row:nth-child(even) {
+  background-color: hsl(var(--muted) / 0.3);
+}
+
+.ag-row:nth-child(odd) {
+  background-color: hsl(var(--background));
+}
+
+.ag-cell {
+  color: hsl(var(--foreground));
+  border-right: 1px solid hsl(var(--border));
+  background-color: inherit;
+}
+
+.ag-cell:last-child {
+  border-right: none;
+}
+
+.ag-body-viewport {
+  background-color: hsl(var(--background));
+}
+
+.ag-pinned-left-cols-container {
+  border-right: 1px solid hsl(var(--border));
+}
