@@ -30,7 +30,7 @@ export const DataGrid = () => {
   
   // Pagination states
   const [page, setPage] = useState(1);
-  const limit = 10;
+  const limit = 15; // Increased for better demonstration
 
   const columnDefs: ColDef[] = [
     { field: 'id', headerName: 'ID', sortable: true, width: 80, pinned: 'left' },
@@ -247,8 +247,11 @@ export const DataGrid = () => {
             }}
           >
             {loading && (
-              <div className="absolute inset-0 bg-background/50 flex items-center justify-center z-10">
-                <Loader2 className="h-8 w-8 animate-spin text-primary" />
+              <div className="absolute inset-0 bg-background/50 flex flex-col items-center justify-center z-10">
+                <Loader2 className="h-8 w-8 animate-spin text-primary mb-2" />
+                <div className="text-sm text-muted-foreground">
+                  🌐 Loading data from remote API...
+                </div>
               </div>
             )}
             <AgGridReact
@@ -270,8 +273,13 @@ export const DataGrid = () => {
 
           {/* Pagination */}
           <div className="border-t border-border p-4 flex items-center justify-between">
-            <div className="text-sm text-muted-foreground">
-              Showing {((page - 1) * limit) + 1} to {Math.min(page * limit, total)} of {total} results
+            <div className="flex flex-col gap-1">
+              <div className="text-sm text-muted-foreground">
+                Showing {((page - 1) * limit) + 1} to {Math.min(page * limit, total)} of {total} results
+              </div>
+              <div className="text-xs text-muted-foreground">
+                🌐 Remote API • Server-side pagination • {limit} records per page • Page {page} of {totalPages}
+              </div>
             </div>
             <div className="flex items-center gap-2">
               <Button
@@ -282,8 +290,32 @@ export const DataGrid = () => {
               >
                 Previous
               </Button>
-              <div className="text-sm text-card-foreground">
-                Page {page} of {totalPages}
+              <div className="flex items-center gap-1">
+                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                  let pageNum;
+                  if (totalPages <= 5) {
+                    pageNum = i + 1;
+                  } else if (page <= 3) {
+                    pageNum = i + 1;
+                  } else if (page >= totalPages - 2) {
+                    pageNum = totalPages - 4 + i;
+                  } else {
+                    pageNum = page - 2 + i;
+                  }
+                  
+                  return (
+                    <Button
+                      key={pageNum}
+                      variant={page === pageNum ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setPage(pageNum)}
+                      disabled={loading}
+                      className="w-8 h-8 p-0"
+                    >
+                      {pageNum}
+                    </Button>
+                  );
+                })}
               </div>
               <Button
                 variant="outline"
