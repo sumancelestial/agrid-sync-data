@@ -1,1 +1,13 @@
 project_id = "rmbwxagztjzkakzsztws"
+
+[functions.qbo-oauth-init]
+verify_jwt = false
+
+[functions.qbo-oauth-callback]
+verify_jwt = false
+
+[functions.qbo-sync-customers]
+verify_jwt = true
+
+[functions.qbo-complete-connection]
+verify_jwt = true

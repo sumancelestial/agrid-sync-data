@@ -14,7 +14,105 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      qbo_connections: {
+        Row: {
+          access_token: string
+          created_at: string
+          expires_at: string
+          id: string
+          realm_id: string
+          refresh_token: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          access_token: string
+          created_at?: string
+          expires_at: string
+          id?: string
+          realm_id: string
+          refresh_token: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          access_token?: string
+          created_at?: string
+          expires_at?: string
+          id?: string
+          realm_id?: string
+          refresh_token?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      qbo_customers: {
+        Row: {
+          active: boolean | null
+          balance: number | null
+          billing_address_city: string | null
+          billing_address_country: string | null
+          billing_address_line1: string | null
+          billing_address_postal_code: string | null
+          billing_address_state: string | null
+          company_name: string | null
+          created_at: string
+          display_name: string
+          email: string | null
+          family_name: string | null
+          given_name: string | null
+          id: string
+          phone: string | null
+          qbo_id: string
+          synced_at: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          active?: boolean | null
+          balance?: number | null
+          billing_address_city?: string | null
+          billing_address_country?: string | null
+          billing_address_line1?: string | null
+          billing_address_postal_code?: string | null
+          billing_address_state?: string | null
+          company_name?: string | null
+          created_at?: string
+          display_name: string
+          email?: string | null
+          family_name?: string | null
+          given_name?: string | null
+          id?: string
+          phone?: string | null
+          qbo_id: string
+          synced_at?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          active?: boolean | null
+          balance?: number | null
+          billing_address_city?: string | null
+          billing_address_country?: string | null
+          billing_address_line1?: string | null
+          billing_address_postal_code?: string | null
+          billing_address_state?: string | null
+          company_name?: string | null
+          created_at?: string
+          display_name?: string
+          email?: string | null
+          family_name?: string | null
+          given_name?: string | null
+          id?: string
+          phone?: string | null
+          qbo_id?: string
+          synced_at?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

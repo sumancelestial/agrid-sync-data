@@ -132,16 +132,9 @@ export const DataGrid = () => {
   const totalPages = Math.ceil(total / limit);
 
   return (
-    <div className="w-full h-screen p-6 bg-background">
-      <div className="max-w-7xl mx-auto space-y-6">
-        {/* Header */}
-        <div className="space-y-2">
-          <h1 className="text-3xl font-bold text-foreground">Data Grid Management</h1>
-          <p className="text-muted-foreground">Filter and manage your data with advanced search capabilities</p>
-        </div>
-
-        {/* Filters */}
-        <div className="bg-card rounded-lg border border-border p-6 space-y-4">
+    <div className="w-full space-y-6">
+      {/* Filters */}
+      <div className="bg-card rounded-lg border border-border p-6 space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold text-card-foreground">Filters</h2>
             <Button variant="outline" size="sm" onClick={handleClearFilters}>
@@ -328,7 +321,6 @@ export const DataGrid = () => {
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 };
